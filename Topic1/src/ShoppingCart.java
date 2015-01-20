@@ -3,37 +3,49 @@ import java.util.List;
 
 
 public class ShoppingCart implements Subject{
-	private List<ItemAbs> items = new ArrayList<ItemAbs>();
+	private String IdCart;
+	private List<IOffer> items = new ArrayList<IOffer>();
+	
+	private IPayStrategy strategy; //Pay Strategy
 	
 	private List<Observer> observers = new ArrayList<Observer>();
 
 	private Sequence counter = Sequence.getInstance();
 	
-	public ShoppingCart(){
-		
+	public ShoppingCart(String id,MarketManager m){
+		setIdCart(id);
+		addObserver(m.getInstance()); //add observer 
 	}
 	
-	public void addProduct(ItemAbs e){
+	public void addProduct(IOffer e){
 		items.add(e);
 		this.notify("new Item/Offer added"); //notify when a new offer is added
 	}
 	
-	public void removeProduct(ItemAbs e){
+	public void removeProduct(IOffer e){
         this.items.remove(e);
     }
 	
 	public String showProducts(){
 		String show = null;
-		for (ItemAbs p: items){
+		for (IOffer p: items){
 			show += p.showOffer();
 		}
 		return show;
 	}
 	
-	public ItemAbs mostExpensiveItem(){
-		ItemAbs expensive = null;
+	public IPayStrategy getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(IPayStrategy strategy) {
+		this.strategy = strategy;
+	}
+	
+	public IOffer mostExpensiveItem(){
+		IOffer expensive = null;
 		double cost=0;
-		for (ItemAbs item: items){
+		for (IOffer item: items){
 			if (cost < item.getCost()){
 				expensive=item;
 				cost=item.getCost();
@@ -43,10 +55,10 @@ public class ShoppingCart implements Subject{
 		
 	}
 	
-	public ItemAbs mostCheapestItem(){
-		ItemAbs cheapest = null;
+	public IOffer mostCheapestItem(){
+		IOffer cheapest = null;
 		double cost=items.get(0).getCost();
-		for (ItemAbs item: items){
+		for (IOffer item: items){
 			if (cost > item.getCost()){
 				cheapest=item;
 				cost=item.getCost();
@@ -58,22 +70,23 @@ public class ShoppingCart implements Subject{
 	
 	public double getTotalCost(){
 		double cost=0;
-		for (ItemAbs item: items){
+		for (IOffer item: items){
 			double a= item.getCost();
 			cost+=a;
 		}
 		return cost;
 	}
 	
-	public void changePriceProduct(double price, ItemAbs product){
+	public void changePriceProduct(double price, IOffer product){
 		product.setCost(price);
 		this.notify("A price has change: " + product.getName() + "new cost: $" + price); //notify when a price changes
 	}
 	
 	public void payCart(){
 		int id= counter.getCounter(); 
-		Sequence.getNext();
-		this.notify("A new transaction was made - ID: " + id + "Total cost: $" + this.getTotalCost()); //notify when A new transaction was made
+		counter.getNext();
+		double total=strategy.pay(this); //pay and apply discount
+		this.notify("A new transaction was made - ID: " + id + "Total cost: $" + total); //notify when A new transaction was made
 	}
 	
 	@Override
@@ -92,6 +105,14 @@ public class ShoppingCart implements Subject{
 		for (Observer o: observers){
 			o.update(g);
 		}
+	}
+
+	public String getIdCart() {
+		return IdCart;
+	}
+
+	public void setIdCart(String idCart) {
+		IdCart = idCart;
 	}
 
 

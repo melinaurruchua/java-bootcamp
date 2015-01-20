@@ -7,7 +7,7 @@ public class Sequence {
 	private static Sequence instance = null;
 	private static int counter;
 	
-	protected Sequence(){
+	private Sequence(){
 	    counter = 0; 
 	}
 	
@@ -18,7 +18,7 @@ public class Sequence {
 	    return instance;
 	}
 	
-	public static int getNext(){
+	public int getNext(){
 	    return ++counter;
 	}
 	

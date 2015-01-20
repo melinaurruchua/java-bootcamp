@@ -4,5 +4,5 @@
 */ 
 
 public interface IPayStrategy {
-	public void pay(ShoppingCart cart);
+	public double pay(ShoppingCart cart);
 }

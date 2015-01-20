@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 * @author Melina
 * @version 1.0 
@@ -8,43 +11,37 @@ public class Client {
 	private int creditNumber;
 	private String email;
 	private String pass;
-	
-	private IPayStrategy strategy;
-	
-	private ShoppingCart cart;
+
+	private List<ShoppingCart> carts;
 	
 	public Client(String name, int creditNumber, String email, String pass) {
 		this.name=name;
 		this.creditNumber=creditNumber;
 		this.email=email;
 		this.pass=pass;
-		cart = new ShoppingCart();
+		carts=new ArrayList<ShoppingCart>();
 	}
 	
 	//make the payment transaction
-	public void payment() {
+	public void payment(int c) {
 		System.out.println("Payment transaction ");
-		strategy.pay(cart);
+		carts.get(c).payCart();;
 	}
 	
-	public IPayStrategy getStrategy() {
-		return strategy;
+	public String showCart(String idCart) {
+		for (ShoppingCart cart: carts){
+			if (idCart.equals(cart.getIdCart()))
+				return cart.showProducts();
+		}
+		return null;
 	}
 
-	public void setStrategy(IPayStrategy strategy) {
-		this.strategy = strategy;
-	}
-
-	public String showCart() {
-		return cart.showProducts();
-	}
-
-	public void addToCart(Item p) {
-		this.cart.addProduct(p);
+	public void addToCart(int c,IOffer p) {
+		carts.get(c).addProduct(p);
 	}
 	
-	public void removeFromCart(Item p){
-		this.cart.removeProduct(p);
+	public void removeFromCart(int c,IOffer p){
+		carts.get(c).removeProduct(p);
 	}
 	
 	public int getCreditNumber() {
@@ -77,6 +74,14 @@ public class Client {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public ShoppingCart getCart(int i) {
+		return carts.get(i);
+	}
+
+	public void addCart(ShoppingCart cart) {
+		carts.add(cart);
 	}
 	
 }

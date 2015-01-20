@@ -4,10 +4,17 @@
 */ 
 
 public class PayStrategyCash implements IPayStrategy{
+	private DiscountMoreExpensive discount;
+	
+	public PayStrategyCash(DiscountPolicy discount) {
+		this.discount=(DiscountMoreExpensive) discount;
+	}
 
 	@Override
-	public void pay(ShoppingCart cart) {
-		System.out.println("pay in Cash  the corresponding amount: " + cart.getTotalCost());
+	public double pay(ShoppingCart cart) {
+		double d=discount.applyDiscount(cart);
+		System.out.println("pay in Cash  the corresponding amount: " + d);
+		return d;
 	}
 
 }

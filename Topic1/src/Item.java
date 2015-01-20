@@ -4,15 +4,19 @@
 */ 
 
 import java.util.Hashtable;
+import java.util.Map;
 
 
-public class Item extends ItemAbs{
+public class Item implements IOffer{
 	
+	private String name;
+	private double cost;
 	private int amount;  
-	private Hashtable<String,Object> feature = new Hashtable<String,Object>();
+	private Map<String,Object> feature = new Hashtable<String,Object>();
 	
 	public Item(String name, double cost){
-		super(name, cost);
+		this.name=name;
+		this.cost=cost;
 	}
 
 	public int getAmount() {
@@ -23,11 +27,11 @@ public class Item extends ItemAbs{
 		this.amount = s;
 	}
 
-	public Hashtable<String,Object> getFeature() {
+	public Map<String,Object> getFeature() {
 		return feature;
 	}
 
-	public void setFeature(Hashtable<String,Object> feature) {
+	public void setFeature(Map<String,Object> feature) {
 		this.feature = feature;
 	}
 	
@@ -46,6 +50,16 @@ public class Item extends ItemAbs{
 	public double getCost() {
 		return cost;
 	}
-	
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
 }

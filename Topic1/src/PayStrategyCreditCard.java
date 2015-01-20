@@ -7,14 +7,19 @@ public class PayStrategyCreditCard implements IPayStrategy{
 	private String name;
 	private int creditNumber;
 	
-	public PayStrategyCreditCard(String name, int creditNumber) {
+	private DiscountSimple discount;
+	
+	public PayStrategyCreditCard(String name, int creditNumber,DiscountPolicy discountCreditCard) {
 		this.setName(name);
 		this.setCreditNumber(creditNumber);
+		this.discount=(DiscountSimple) discountCreditCard;
 	}
 	
 	@Override
-	public void pay(ShoppingCart cart) {
-		System.out.println("pay by Credit Card the corresponding amount: " + cart.getTotalCost());
+	public double pay(ShoppingCart cart) {
+		double d=discount.applyDiscount(cart);
+		System.out.println("pay by Credit Card the corresponding amount: " + d);
+		return d;
 	}
 
 	public String getName() {

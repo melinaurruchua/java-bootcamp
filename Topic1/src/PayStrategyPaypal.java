@@ -7,14 +7,19 @@ public class PayStrategyPaypal implements IPayStrategy{
 	private String email;
 	private String pass;
 	
-	public PayStrategyPaypal(String email, String pass) {
+	private DiscountCheapest discount;
+	
+	public PayStrategyPaypal(String email, String pass,DiscountPolicy discount) {
 		this.setEmail(email);
 		this.setPass(pass);
+		this.discount=(DiscountCheapest) discount;
 	}
 
 	@Override
-	public void pay(ShoppingCart cart) {
-		System.out.println("pay with Paypal the corresponding amount: " + cart.getTotalCost());
+	public double pay(ShoppingCart cart) {
+		double d=discount.applyDiscount(cart);
+		System.out.println("pay with Paypal the corresponding amount: " + d);
+		return d;
 	}
 
 	public String getPass() {
