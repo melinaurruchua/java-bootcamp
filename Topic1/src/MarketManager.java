@@ -34,7 +34,7 @@ public class MarketManager implements Observer{
 		notice.add(g);
 	}
 
-	public MarketManager getInstance() {
+	public static MarketManager getInstance() {
 		if(instance==null) {
 		      instance = new MarketManager();
 		}

@@ -3,18 +3,18 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class playlist extends trackContainer{
-	private State state;
+public class Playlist extends TrackContainer{
+	private AudioPlayerCommand state;
 	
-	private List<trackSong> songs= new ArrayList<trackSong>();
+	private List<TrackSong> songs= new ArrayList<TrackSong>();
 	
 	private String currentSong;
 	
-	public playlist(String name) {
+	public Playlist(String name) {
 		super(name);
 	}
 	
-	public void addTrack(trackSong track){
+	public void addTrack(TrackSong track){
 		songs.add(track);
 	}
 	
@@ -22,7 +22,7 @@ public class playlist extends trackContainer{
 		state.goNext(this,nextstate);
 	}
 	
-	public void setState(State s){
+	public void setState(AudioPlayerCommand s){
 		this.state=s;
 	}
 	
@@ -30,9 +30,9 @@ public class playlist extends trackContainer{
 		boolean on=true;
 		while (on){
 			boolean onrandom=true;
-			Iterator<trackSong> it = songs.iterator();
+			Iterator<TrackSong> it = songs.iterator();
 			while (it.hasNext() && on) {
-				trackSong track = it.next();
+				TrackSong track = it.next();
 				currentSong=track.getName();
 				while (onrandom){
 					int r= (int) Math.random();

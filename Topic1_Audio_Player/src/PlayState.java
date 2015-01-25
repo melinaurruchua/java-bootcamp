@@ -1,16 +1,16 @@
 
-public class playState implements State{
+public class PlayState implements AudioPlayerCommand{
 	String current = "play";
 	
 	@Override
-	public void goNext(playlist p,String nextstate) {
+	public void goNext(Playlist p,String nextstate) {
 		if("pause".equals(nextstate)){
-			State pausestate = new pauseState();
+			AudioPlayerCommand pausestate = new PauseState();
 			p.setState(pausestate);
 			System.out.println("Pause mode.");
 		}
 		else{
-			State stopstate = new stopState();
+			AudioPlayerCommand stopstate = new StopState();
 			p.setState(stopstate);
 			System.out.println("Stop mode.");
 		}

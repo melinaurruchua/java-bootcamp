@@ -1,4 +1,4 @@
 
 public interface Strategy {
-	public void filterSong(playlist list);
+	public void filterSong(Playlist list);
 }

@@ -1,4 +1,4 @@
 
-public interface State {
-	public void goNext(playlist p,String nextstate);
+public interface AudioPlayerCommand {
+	public void goNext(Playlist p,String nextstate);
 }

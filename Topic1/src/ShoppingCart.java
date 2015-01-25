@@ -12,9 +12,9 @@ public class ShoppingCart implements Subject{
 
 	private Sequence counter = Sequence.getInstance();
 	
-	public ShoppingCart(String id,MarketManager m){
+	public ShoppingCart(String id){
 		setIdCart(id);
-		addObserver(m.getInstance()); //add observer 
+		addObserver(MarketManager.getInstance()); //add observer 
 	}
 	
 	public void addProduct(IOffer e){

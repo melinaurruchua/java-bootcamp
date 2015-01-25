@@ -30,8 +30,9 @@ public class Client {
 	
 	public String showCart(String idCart) {
 		for (ShoppingCart cart: carts){
-			if (idCart.equals(cart.getIdCart()))
+			if (idCart.equals(cart.getIdCart())){
 				return cart.showProducts();
+			}
 		}
 		return null;
 	}

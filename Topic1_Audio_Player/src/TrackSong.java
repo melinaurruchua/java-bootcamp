@@ -1,11 +1,11 @@
 
-public class trackSong {
+public class TrackSong {
 	private String name;
 	private String author;
 	private int durationInSec;
 	private String album;
 	
-	public trackSong(String name,String author,int durationInSec,String album){
+	public TrackSong(String name,String author,int durationInSec,String album){
 		this.setName(name);
 		this.setAuthor(author);
 		this.setDurationInSec(durationInSec);

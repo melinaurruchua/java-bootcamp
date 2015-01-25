@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class trackContainer {
+public class TrackContainer {
 	private String name;
 	protected int totalTimeInSec;
-	protected List<trackSong> songs= new ArrayList<trackSong>();
+	protected List<TrackSong> songs= new ArrayList<TrackSong>();
 	
-	public trackContainer(String name){
+	public TrackContainer(String name){
 		this.name=name;
 		this.totalTimeInSec=0;
 	}
@@ -21,7 +21,7 @@ public class trackContainer {
 	}
 
 	public int getTotalTimeInSec(){
-		for (trackSong song: songs){
+		for (TrackSong song: songs){
 			totalTimeInSec+=song.getDurationInSec();
 		}
 		return totalTimeInSec;
@@ -31,11 +31,11 @@ public class trackContainer {
 		this.totalTimeInSec = totalTimeInSec;
 	}
 	
-	public void addTrack(trackSong track){
+	public void addTrack(TrackSong track){
 		songs.add(track);
 	}
 	
-	public void removeTrack(trackSong track){
+	public void removeTrack(TrackSong track){
 		songs.remove(track);
 	}
 	
